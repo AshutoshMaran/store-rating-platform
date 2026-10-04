@@ -1,0 +1,69 @@
+{
+
+
+  "type": "module",
+
+
+  "scripts": {
+
+
+    "dev": "npx nodemon server.js",
+
+
+    "start": "node server.js",
+
+
+    "generate": "npx prisma generate",
+
+
+    "migrate": "npx prisma migrate dev"
+
+
+  },
+
+
+  "dependencies": {
+
+
+    "@prisma/client": "^6.19.3",
+
+
+    "bcryptjs": "^3.0.3",
+
+
+    "cookie-parser": "^1.4.7",
+
+
+    "cors": "^2.8.6",
+
+
+    "dotenv": "^18.0.5",
+
+
+    "express": "^5.2.1",
+
+
+    "jsonwebtoken": "^9.0.3",
+
+
+    "nodemon": "^3.1.14",
+
+
+    "pg": "^8.23.1"
+
+
+  },
+
+
+  "devDependencies": {
+
+
+    "prisma": "^6.19.3"
+
+
+  }
+
+
+}
+
+
