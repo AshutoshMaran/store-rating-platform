@@ -41,7 +41,7 @@ export const loginController = async (req, res) => {
     }
 
     const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    const accessToken = jwt.sign({ userId: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "15m" });
+    const accessToken = jwt.sign({ userId: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "20m" });
 
     const cookieOptions = {
       httpOnly: true,
@@ -109,6 +109,28 @@ export const registerController = async (req, res) => {
         role: true
       }
     });
+
+
+      const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const accessToken = jwt.sign({ userId: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: "20m" });
+
+    const cookieOptions = {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000
+    };
+
+        if (user.role === 'ADMIN') {
+      res.cookie("adminRefreshToken", refreshToken, cookieOptions);
+      res.cookie("adminAccessToken", accessToken, cookieOptions);
+    } else if (user.role === 'STORE_OWNER') {
+      res.cookie("storeOwnerRefreshToken", refreshToken, cookieOptions);
+      res.cookie("storeOwnerAccessToken", accessToken, cookieOptions);
+    } else {
+      res.cookie("userRefreshToken", refreshToken, cookieOptions);
+      res.cookie("userAccessToken", accessToken, cookieOptions);
+    }
 
     return res.status(201).json({ message: 'User registered successfully', user });
   } catch (error) {

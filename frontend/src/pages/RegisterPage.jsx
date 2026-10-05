@@ -41,7 +41,7 @@ export default function RegisterPage() {
 
       setSuccessMsg('Account registered successfully! Redirecting to login...');
       setTimeout(() => {
-        navigate('/login');
+        navigate('/user/dashboard');
       }, 1500);
     } catch (err) {
       setServerError(err.response?.data?.message || 'Registration failed. Please try again.');
